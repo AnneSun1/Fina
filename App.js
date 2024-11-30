@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Button, Text, View } from 'react-native';
 import { Slot } from 'expo-router';
-// App.js
+import "./global.css"
 import React, { useState } from 'react';
 import Auth0 from 'react-native-auth0';
 
