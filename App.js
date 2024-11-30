@@ -4,11 +4,16 @@ import { Slot } from 'expo-router';
 import "./global.css"
 import React, { useState } from 'react';
 import Auth0 from 'react-native-auth0';
+import Navigator from "./Navigator";
 
 const auth0 = new Auth0({
   domain: 'dev-5ctb4dnlwn8u51fd.us.auth0.com', // replace with your Auth0 domain
   clientId: 'h9AHq8ASTXZvJiORdnTj9qdAePgkD4j3', // replace with your Auth0 client ID
 });
+
+const App = () => {
+  return <Navigator />;
+};
 
 export default function App() {
   const [user, setUser] = useState(null);
