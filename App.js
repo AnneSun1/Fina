@@ -3,8 +3,8 @@ import { Text } from 'react-native';
 import { Slot } from 'expo-router';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import FirstScreen from './components/ui/FirstScreen.js';
-import Navigator from './components/ui/Navigator.js'; // Assuming this is used for Auth or other screens
+import FirstScreen from './app/(tabs)/FirstScreen.js';
+import Navigator from './app/(tabs)/Navigator.js'; // Assuming this is used for Auth or other screens
 import Auth0 from 'react-native-auth0';
 
 // Auth0 Configuration
