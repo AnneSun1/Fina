@@ -13,6 +13,14 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+    "plugins": [
+      [
+        "react-native-auth0",
+        {
+          "domain": "dev-5ctb4dnlwn8u51fd.us.auth0.com"
+        }
+      ]
+    ],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.anonymous.Fina"

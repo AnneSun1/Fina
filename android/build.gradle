@@ -39,3 +39,10 @@ allprojects {
         maven { url 'https://www.jitpack.io' }
     }
 }
+
+android {
+    defaultConfig {
+        // Add the next line
+        manifestPlaceholders = [auth0Domain: "dev-5ctb4dnlwn8u51fd.us.auth0.com", auth0Scheme: "${applicationId}.auth0"]
+    }
+}

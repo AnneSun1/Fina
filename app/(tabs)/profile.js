@@ -1,14 +1,17 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { Text, View } from 'react-native'
+import { useAuth0 } from 'react-native-auth0';
 import React from 'react'
 
-const profile = () => {
+const Profile = () => {
+  const {user, error} = useAuth0();
+
   return (
-    <View>
-      <Text>profile</Text>
-    </View>
+      <>
+          {user && <Text>Logged in as {user.name}</Text>}
+          {!user && <Text>Not logged in</Text>}
+          {error && <Text>{error.message}</Text>}
+      </>
   )
 }
 
-export default profile
-
-const styles = StyleSheet.create({})
+export default Profile;
