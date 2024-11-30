@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Button, Text, View } from 'react-native';
-
-// App.js
+import { Slot } from 'expo-router';
+import "./global.css"
 import React, { useState } from 'react';
 import Auth0 from 'react-native-auth0';
 
@@ -13,46 +13,12 @@ const auth0 = new Auth0({
 export default function App() {
   const [user, setUser] = useState(null);
 
-  const login = async () => {
-    try {
-      const credentials = await auth0.webAuth.authorize({
-        scope: 'openid profile email',
-      });
-      const userInfo = await auth0.auth.userInfo({ token: credentials.accessToken });
-      setUser(userInfo);
-    } catch (error) {
-      console.error('Login failed', error);
-    }
-  };
-
-  const logout = async () => {
-    try {
-      await auth0.webAuth.clearSession();
-      setUser(null);
-    } catch (error) {
-      console.error('Logout failed', error);
-    }
-  };
-
-  return (
-    <View>
-      {!user ? (
-        <Button title="Log In" onPress={login} />
-      ) : (
-        <View>
-          <Text>Welcome, {user.name}</Text>
-          <Button title="Log Out" onPress={logout} />
-        </View>
-      )}
-    </View>
+  return ( 
+    <>
+    <Text>Header</Text>
+      <Slot/>
+    <Text>Footer</Text>
+    </>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
