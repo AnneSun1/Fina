@@ -1,17 +1,15 @@
 import { Image, View, Text } from 'react-native'
 import React from 'react'
-import { Tabs, Redirect } from 'expo-router';
-// import HomeIcon from '@mui/icons-material/Home';
-import { icons } from '../../constants/icons.js';
+import { Tabs } from 'expo-router';
 
 const TabIcon = ({icon, name, color, focused}) => {
   return (
-    <View className ="items-center justify-center gap-2">
+    <View className ="flex items-center justify-center pt-10 gap-2">
       <Image source = {icon}
         resizeMode="contain"
-        className="w-1 h-1"
+        className="w-6 h-6 border-solid border-black"
         tintColor = {color}
-        style={{width: 40, height: 40}}
+
       />
       <Text className={`${focused ? 'font-psemibold' : 'font-pregular'} text-xs`}
         style={{color: color}}>{name}</Text>
@@ -26,11 +24,12 @@ const TabsLayout = () => {
           screenOptions={{
             tabBarShowLabel: false,
             tabBarActiveTintColor: '#3E5295',
+            tabBarInactiveTintColor: '#fff',
             tabBarStyle: {
               backgroundColor: '#B9BDC7',
-              borderTopWidth: 20,
+              borderTopWidth: 1,
               borderTopColor: '#B9BDC7',
-              height: 60
+              height: 84
             }
           }}
         >
@@ -38,11 +37,10 @@ const TabsLayout = () => {
             options={{
                 title: 'Calender',
                 headerShown: false,
-                tabBarIcon: ({ focused }) => (
+                tabBarIcon: ({ color, focused }) => (
                   <TabIcon 
                   icon= {require('../../assets/icons/home.png')} // hard coded in for now
-                  // name="Calender"
-                  color = "black"
+                  color = {color}
                   focused={ focused }
                   />
                 )
@@ -51,11 +49,10 @@ const TabsLayout = () => {
               options={{
                 title: 'add',
                 headerShown: false,
-                tabBarIcon: ({ focused }) => (
+                tabBarIcon: ({ color, focused }) => (
                   <TabIcon 
                   icon= {require('../../assets/icons/add.png')}
-                  // name="Add"
-                  color = "black"
+                  color = {color}
                   focused={ focused }
                   />
                 )
@@ -64,11 +61,10 @@ const TabsLayout = () => {
               options={{
                 title: 'Profile',
                 headerShown: false,
-                tabBarIcon: ({ focused }) => (
+                tabBarIcon: ({ color, focused }) => (
                   <TabIcon 
                   icon= {require('../../assets/icons/profile.png')}
-                  // name="Profile"
-                  color = "black"
+                  color={color}
                   focused={ focused }
                   />
                 )
