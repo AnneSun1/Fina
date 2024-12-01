@@ -60,7 +60,8 @@ export default function Home() {
           // className="w-[100] h-[100]"
         />
       )}
-      <Link href="/(auth)/calendar" className="justify-center">Calender</Link>
+      <Link href="/(tabs)/calendar" className="justify-center">Calender</Link>
+      <Link href="/(auth)/sign-in" className="justify-center">Calender</Link>
 {/*       
       <Button onPress={}><Text>Start</Text></Button> */}
     </SafeAreaView>
