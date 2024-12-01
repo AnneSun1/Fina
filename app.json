@@ -23,7 +23,8 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.anonymous.Fina"
+      "bundleIdentifier": "com.anonymous.Fina",
+      "package": "com.jsm.Fina"
     },
     "android": {
       "adaptiveIcon": {

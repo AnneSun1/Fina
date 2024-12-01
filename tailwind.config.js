@@ -5,23 +5,23 @@ module.exports = {
   presets: [require("nativewind/preset")],
   theme: {
     extend: {
-    colors: {
-      customPurple: '#C4BBD0',
-      customBlue: '#3E5295',
-      customWhite: '#FFFFFF',
+      colors: {
+        customPurple: "#C4BBD0",
+        customBlue: "#3E5295",
+        customWhite: "#FFFFFF",
+      },
+      fontFamily: {
+        pthin: ["Poppins-Thin", "sans-serif"],
+        pextralight: ["Poppins-ExtraLight", "sans-serif"],
+        plight: ["Poppins-Light", "sans-serif"],
+        pregular: ["Poppins-Regular", "sans-serif"],
+        pmedium: ["Poppins-Medium", "sans-serif"],
+        psemibold: ["Poppins-SemiBold", "sans-serif"],
+        pbold: ["Poppins-Bold", "sans-serif"],
+        pextrabold: ["Poppins-ExtraBold", "sans-serif"],
+        pblack: ["Poppins-Black", "sans-serif"],
+      },
     },
-    fontFamily: {
-      pthin: ["Poppins-Thin", "sans-serif"],
-      pextralight: ["Poppins-ExtraLight", "sans-serif"],
-      plight: ["Poppins-Light", "sans-serif"],
-      pregular: ["Poppins-Regular", "sans-serif"],
-      pmedium: ["Poppins-Medium", "sans-serif"],
-      psemibold: ["Poppins-SemiBold", "sans-serif"],
-      pbold: ["Poppins-Bold", "sans-serif"],
-      pextrabold: ["Poppins-ExtraBold", "sans-serif"],
-      pblack: ["Poppins-Black", "sans-serif"],
-    },
-  },
   },
   plugins: [],
-}
+};
