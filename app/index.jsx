@@ -19,7 +19,7 @@ export default function Home() {
   useEffect(() => {
     setShowImage1(true);
     setShowImage2(false);
-
+    
     const timer1 = setTimeout(() => {
       setShowImage1(false); // Hide the image after 3 seconds
       setShowImage2(true);
@@ -28,8 +28,12 @@ export default function Home() {
     const timer2 = setTimeout(() => {
       setShowImage1(false); // Hide the image after 3 seconds
     }, 3000); // 3000 milliseconds = 3 seconds
+    
+    const timer3 = setTimeout(() => {
+      setShowImage2(false);
+    }, 5000)
 
-    return () => clearTimeout(timer2); // Clean up the timer
+    return () => clearTimeout(timer3); // Clean up the timer
   }, []);
 
   return (
@@ -40,9 +44,9 @@ export default function Home() {
         }}
       ></ScrollView> */}
 
-      <Link href="/calender" style={{ color: "blue" }}>
+      {/* <Link href="/calender" style={{ color: "blue" }}>
         Start
-      </Link>
+      </Link> */}
 
       {showImage1 && (
         <Image
@@ -56,6 +60,8 @@ export default function Home() {
           // className="w-[100] h-[100]"
         />
       )}
+{/*       
+      <Button onPress={}><Text>Start</Text></Button> */}
     </SafeAreaView>
   );
 }
@@ -69,10 +75,4 @@ const styles = StyleSheet.create({
   },
 });
 
-// const App = () => {
-//   return (
-//     <Auth0Provider domain={"dev-5ctb4dnlwn8u51fd.us.auth0.com"} clientId={"h9AHq8ASTXZvJiORdnTj9qdAePgkD4j3"}>
-//       <Text>hi</Text>
-//     </Auth0Provider>
-//   );
-// };
+
