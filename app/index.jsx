@@ -15,61 +15,44 @@ import React, { useState, useEffect } from "react";
 export default function Home() {
   const [showImage1, setShowImage1] = useState(false);
   const [showImage2, setShowImage2] = useState(false);
-
+  shownImages = false;
   useEffect(() => {
     setShowImage1(true);
     setShowImage2(false);
     
     const timer1 = setTimeout(() => {
-      setShowImage1(false); // Hide the image after 3 seconds
+      setShowImage1(false); 
       setShowImage2(true);
-    }, 3000); // 3000 milliseconds = 3 seconds
+    }, 1500); 
 
     const timer2 = setTimeout(() => {
-      setShowImage1(false); // Hide the image after 3 seconds
-    }, 3000); // 3000 milliseconds = 3 seconds
+      setShowImage1(false);
+    }, 1500);
     
     const timer3 = setTimeout(() => {
       setShowImage2(false);
-    }, 5000)
+      shownImages = true;
+      router.push("/calender");
+    }, 3500)
 
-    return () => clearTimeout(timer3); // Clean up the timer
+    return () => clearTimeout(timer3); 
   }, []);
 
   return (
     <SafeAreaView className="flex-1 items-center h-full">
-      {/* <ScrollView
-        contentContainerStyle={{
-          height: "80%",
-        }}
-      ></ScrollView> */}
-
-      {/* <Link href="/calender" style={{ color: "blue" }}>
-        Start
-      </Link> */}
 
       {showImage1 && (
         <Image
           source={require("../assets/icons/start.png")}
-          // className="w-[100] h-[100]"
         />
       )}
       {showImage2 && (
         <Image
           source={require("../assets/icons/welcome.png")}
-          // className="w-[100] h-[100]"
         />
       )}
-      <CustomButton
-            title="Continue with Email"
-            handlePress={() => router.push("/calender")}
-            containerStyles="w-full mt-7"
-          />
-      <Link href="sign-in" className="justify-center">Login</Link>
-{/*       
-      <Button onPress={}><Text>Start</Text></Button> */}
     </SafeAreaView>
-  );
+  )
 }
 
 const styles = StyleSheet.create({

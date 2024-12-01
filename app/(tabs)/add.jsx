@@ -3,13 +3,17 @@ import {
   Text,
   View,
   TextInput,
+  Button,
   TouchableOpacity,
 } from "react-native";
 import React, { useRef, useEffect, useState } from "react";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { useIsFocused } from "@react-navigation/native";
+import { useUser } from "../../context/UserContext";
 
 const add = () => {
+  const { user, updateSpending } = useUser();
+  const updateUserSpending = useUser();
   const scrollViewRef = useRef(null);
   const isFocused = useIsFocused();
   const [showInput, setShowInput] = useState(false);
@@ -25,6 +29,12 @@ const add = () => {
   };
 
   const handleSubmit = () => {
+    const spending = {
+      date: getFormattedDate(),
+      category: selectedCategory,
+      spending: inputValue,
+    };
+    updateSpending(user.id, spending);
     setShowText(true);
     console.log(inputValue);
     setTimeout(() => {
@@ -41,9 +51,19 @@ const add = () => {
     }
   }, [isFocused]);
 
+  const getFormattedDate = () => {
+    const today = new Date();
+
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, "0"); // Month is 0-indexed, so add 1
+    const day = String(today.getDate()).padStart(2, "0");
+
+    return `${year}-${month}-${day}`;
+  };
+
   return (
     <View className="flex-1 mt-40 items-center">
-      <Text className="text-4xl text-customBlue top-2 text-center w-[250px] pb-28">
+      <Text className="text-4xl text-customBlue top-2 text-center w-[250px] pb-28 font-imprima">
         Select Category to Add Expense
       </Text>
 
@@ -57,7 +77,7 @@ const add = () => {
               className="icon-customBlue"
               onPress={() => handlePress("Food")}
             />
-            <Text className="text-3xl text-customBlue">Food</Text>
+            <Text className="text-3xl text-customBlue font-imprima">Food</Text>
           </TouchableOpacity>
         </View>
         <View className="px-20">
@@ -69,7 +89,9 @@ const add = () => {
               className="icon-customBlue"
               onPress={() => handlePress("Transport")}
             />
-            <Text className="text-3xl text-customBlue">Transport</Text>
+            <Text className="text-3xl text-customBlue font-imprima">
+              Transport
+            </Text>
           </TouchableOpacity>
         </View>
         <View className="px-20">
@@ -81,7 +103,9 @@ const add = () => {
               className="icon-customBlue"
               onPress={() => handlePress("Entertainment")}
             />
-            <Text className="text-3xl text-customBlue">Entertainment</Text>
+            <Text className="text-3xl text-customBlue font-imprima">
+              Entertainment
+            </Text>
           </TouchableOpacity>
         </View>
         <View className="px-20">
@@ -93,7 +117,9 @@ const add = () => {
               className="icon-customBlue"
               onPress={() => handlePress("Shopping")}
             />
-            <Text className="text-3xl text-customBlue">Shopping</Text>
+            <Text className="text-3xl text-customBlue font-imprima">
+              Shopping
+            </Text>
           </TouchableOpacity>
         </View>
         <View className="px-20">
@@ -105,7 +131,9 @@ const add = () => {
               className="icon-customBlue"
               onPress={() => handlePress("Health")}
             />
-            <Text className="text-3xl text-customBlue">Health</Text>
+            <Text className="text-3xl text-customBlue font-imprima">
+              Health
+            </Text>
           </TouchableOpacity>
         </View>
         <View className="px-20">
@@ -121,34 +149,60 @@ const add = () => {
           </TouchableOpacity>
         </View>
         <View className="px-28">
-          <TouchableOpacity className="items-center">
-            <Icon
-              name="credit-card"
-              size={200}
-              color="navy"
-              className="icon-customBlue"
-              onPress={() => handlePress("Bill Payment")}
-            />
-            <Text className="text-3xl text-customBlue">Bill Payment</Text>
-          </TouchableOpacity>
+          <Icon
+            name="credit-card"
+            size={200}
+            color="navy"
+            className="icon-customBlue"
+            onPress={() => handlePress("Bill Payment")}
+          />
+          <Text className="text-3xl text-customBlue">Bill Payment</Text>
         </View>
       </ScrollView>
 
-      {showInput && (
-        <View>
-          <View className="flex-row align-center bg-slate-300 ">
-            <Text className="py-3 pl-3 font-bold text-xl">$</Text>
-            <TextInput
-              placeholder="Input Amount"
-              value={inputValue}
-              onChangeText={(text) => setInputValue(text)}
-            />
-          </View>
-          <TouchableOpacity onPress={handleSubmit} className="items-center p-7">
-            <Text className="bg-customPurple p-2">Submit</Text>
-          </TouchableOpacity>
-        </View>
-      )}
+      <View
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: 4,
+          paddingVertical: 7,
+          width: "100%",
+        }}
+      >
+        <TextInput
+          style={{
+            width: "70%",
+            height: 40,
+            borderWidth: 2,
+            padding: 10,
+            borderRadius: 10,
+            borderColor: "#3E5295",
+          }}
+          inputMode="decimal"
+          placeholder="Add spendings"
+          placeholderTextColor="#cbcacf"
+          value={inputValue}
+          onChangeText={(text) => setInputValue(text)}
+        />
+
+        <TouchableOpacity
+          style={{
+            width: "30%",
+            height: 40,
+            padding: 10,
+            borderRadius: 10,
+            borderWidth: 2,
+            borderColor: "#3E5295",
+            margin: 20,
+            justifyContent: "center", // Centering the text
+            alignItems: "center",
+          }}
+          title="Submit"
+          onPress={handleSubmit}
+        >
+          <Text style={{ color: "#3E5295", fontWeight: 500 }}>Submit</Text>
+        </TouchableOpacity>
+      </View>
       {showText && <Text>{selectedCategory} Expense Submitted</Text>}
     </View>
   );
