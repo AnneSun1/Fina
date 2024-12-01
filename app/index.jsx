@@ -37,7 +37,7 @@ export default function Home() {
   }, []);
 
   return (
-    <SafeAreaView className="flex-1 items-center">
+    <SafeAreaView className="flex-1 items-center h-full">
       {/* <ScrollView
         contentContainerStyle={{
           height: "80%",
@@ -60,6 +60,7 @@ export default function Home() {
           // className="w-[100] h-[100]"
         />
       )}
+      <Link href="/(auth)/calendar" className="justify-center">Calender</Link>
 {/*       
       <Button onPress={}><Text>Start</Text></Button> */}
     </SafeAreaView>
