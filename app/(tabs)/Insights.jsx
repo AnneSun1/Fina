@@ -1,3 +1,133 @@
+import React, { useState, useEffect } from "react";
+import { View, Text, TouchableOpacity } from "react-native";
+import PieChart from "react-native-pie-chart";
+
+// Sample data
+const data = [
+  {
+    id: 1,
+    name: "John Doe",
+    email: "john@gmail.com",
+    "monthly-budget": 400,
+    spendings: [
+      { date: "2024-11-29", category: "Food", spending: 20 },
+      { date: "2024-11-29", category: "Other", spending: 2 },
+      { date: "2024-11-20", category: "Other", spending: 18 },
+      { date: "2024-11-15", category: "Shopping", spending: 70 },
+    ],
+  },
+  {
+    id: 2,
+    name: "Bob Johns",
+    email: "bob@gmail.com",
+    "monthly-budget": 1000,
+    spendings: [
+      { date: "2024-11-29", category: "Food", spending: 200 },
+      { date: "2024-11-29", category: "Other", spending: 2 },
+      { date: "2024-11-20", category: "Other", spending: 15 },
+      { date: "2024-11-15", category: "Shopping", spending: 200 },
+    ],
+  },
+];
+
+const getCategoryColor = (category) => {
+  const categoryColors = {
+    Food: "#FF6347", // Tomato Red
+    Other: "#4682B4", // SteelBlue
+    Shopping: "#32CD32", // LimeGreen
+  };
+  return categoryColors[category] || "#000000"; // Default to black if category color is not defined
+};
+
+const Insights = () => {
+  const [selectedUser, setSelectedUser] = useState(data[0]); // Default to first user
+
+  const totalSpending = selectedUser.spendings.reduce(
+    (acc, curr) => acc + curr.spending,
+    0
+  );
+  const totalBudget = selectedUser["monthly-budget"];
+
+  const categoryData = selectedUser.spendings.reduce((acc, curr) => {
+    const { category, spending } = curr;
+    if (!acc[category]) {
+      acc[category] = { spending: 0, color: getCategoryColor(category) };
+    }
+    acc[category].spending += spending;
+    return acc;
+  }, {});
+
+  const pieData = Object.keys(categoryData).map((category) => {
+    return {
+      value: categoryData[category].spending,
+      color: categoryData[category].color,
+      label: category,
+    };
+  });
+
+  const values = pieData.map((d) => d.value);
+  const colors = pieData.map((d) => d.color);
+
+  return (
+    <View
+      style={{
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "#ffffff",
+      }}
+    >
+      <Text
+        style={{
+          fontSize: 50,
+          color: "#3E5295", // Custom Blue
+          fontWeight: "500",
+        }}
+      >
+        Expense Insights
+      </Text>
+      <Text
+        style={{
+          fontSize: 30,
+          color: "#000000",
+          textAlign: "center",
+        }}
+      >
+        You have used up {((totalSpending / totalBudget) * 100).toFixed(2)}% of
+        your budget so far
+      </Text>
+      <PieChart
+        widthAndHeight={200}
+        series={values}
+        sliceColor={colors}
+        doughnut={true}
+        coverRadius={0.5}
+        coverFill="#FFF"
+      />
+      <View style={{ marginTop: 20 }}>
+        {data.map((user, index) => (
+          <TouchableOpacity
+            key={index}
+            onPress={() => setSelectedUser(user)}
+            style={{
+              padding: 10,
+              backgroundColor: "#4682B4",
+              borderRadius: 5,
+              marginVertical: 5,
+            }}
+          >
+            <Text style={{ fontSize: 18, color: "#fff" }}>
+              Switch to {user.name}
+            </Text>
+          </TouchableOpacity>
+        ))}
+      </View>
+    </View>
+  );
+};
+
+export default Insights;
+
 /*
 ======VERSION 1======
 import { View, Text } from "react-native";
@@ -231,9 +361,12 @@ const Insights = () => {
 export default Insights;
 ======VERSION 2======
 */
+/*
+======VERSION 3======
 import { View, Text, TouchableOpacity } from "react-native";
 import React, { useState, useEffect } from "react";
-import { PieChart } from "react-native-svg-charts";
+//import { PieChart } from "react-native-svg-charts";
+import PieChart from "react-native-pie-chart";
 import { Text as SvgText } from "react-native-svg";
 import { G, Circle } from "react-native-svg";
 
@@ -379,23 +512,16 @@ const Insights = () => {
             of your budget so far
           </Text>
           <PieChart
-            style={{ height: 200, width: 200, marginTop: 20 }}
-            data={pieData}
-            innerRadius="50%"
-            padAngle={0.02}
-            outerRadius="100%"
-          >
-            <Labels />
-          </PieChart>
-          <Circle
-            style={{ borderRadius: 50 }}
-            cx="100"
-            cy="100"
-            r="95"
-            stroke="black"
-            strokeWidth="2"
+            widthAndHeight={200}
+            series={values}
+            sliceColor={colors}
+            doughnut={true}
+            coverRadius={0.5}
+            coverFill="#FFF"
           />
-        </>
+            <Labels />
+          
+         
       )}
       <View style={{ marginTop: 20 }}>
         {data.map((user, index) => (
@@ -411,3 +537,4 @@ const Insights = () => {
 };
 
 export default Insights;
+*/
