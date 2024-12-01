@@ -1,0 +1,58 @@
+[
+    {
+        "id": 1,
+        "name": "John Doe",
+        "email": "john@gmail.com",
+        "monthly-budget": 400,
+        "spendings": [{
+            "date": "2024-11-29",
+            "category": "Food",
+            "spending": 20
+        },
+        {
+            "date": "2024-11-29",
+            "category": "Other",
+            "spending": 2
+        },
+        {
+            "date": "2024-11-20",
+            "category": "Other",
+            "spending": 18
+        },
+        {
+            "date": "2024-11-15",
+            "category": "Shopping",
+            "spending": 70
+        }
+    ]
+
+    },
+    {
+        "id": 2,
+        "name": "Bob Johns",
+        "email": "bob@gmail.com",
+        "monthly-budget": 1000,
+        "spendings": [{
+            "date": "2024-11-29",
+            "category": "Food",
+            "spending": 200
+        },
+        {
+            "date": "2024-11-29",
+            "category": "Other",
+            "spending": 2
+        },
+        {
+            "date": "2024-11-20",
+            "category": "Other",
+            "spending": 15
+        },
+        {
+            "date": "2024-11-15",
+            "category": "Shopping",
+            "spending": 200
+        }
+    ]
+
+    }
+]
