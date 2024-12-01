@@ -60,8 +60,12 @@ export default function Home() {
           // className="w-[100] h-[100]"
         />
       )}
-      <Link href="/(tabs)/calendar" className="justify-center">Calender</Link>
-      <Link href="/(auth)/sign-in" className="justify-center">Calender</Link>
+      <CustomButton
+            title="Continue with Email"
+            handlePress={() => router.push("/calender")}
+            containerStyles="w-full mt-7"
+          />
+      <Link href="sign-in" className="justify-center">Login</Link>
 {/*       
       <Button onPress={}><Text>Start</Text></Button> */}
     </SafeAreaView>
