@@ -6,7 +6,6 @@ import { View, Text, ScrollView, Dimensions, Alert, Image } from "react-native";
 import FormField from "../../components/FormField";
 import CustomButton from "../../components/CustomButton";
 import { getCurrentUser, signIn } from "../../lib/appwrite";
-import { useGlobalContext } from "../../context/GlobalProvider";
 
 const SignIn = () => {
     const { setUser, setIsLogged } = useGlobalContext();
@@ -23,7 +22,10 @@ const SignIn = () => {
           setSubmitting(true);
           try {
             await signIn(form.email, form.password);
-            const result = await getCurrentUser();
+            const result = await supabase
+                .from('users')
+                .select('id')
+                .eq('email', email);
             setUser(result);
             setIsLogged(true);
       
@@ -46,8 +48,10 @@ const SignIn = () => {
             <FormField
             title="Email"
             value={form.email}
-            handleChangeText={(e) => setForm({
-                ...form, email: e})}
+            handleChangeText={(e) => {
+                
+                setForm({
+                ...form, email: e})}}
             otherStyles="mt-7"
             keyboardType="email-address"
             />
@@ -78,3 +82,4 @@ const SignIn = () => {
 }
 
 export default SignIn;
+

@@ -56,7 +56,7 @@ const TabsLayout = () => {
                   />
                 )
             }}/>
-            <Tabs.Screen name="profile" 
+            {/* <Tabs.Screen name="profile" 
               options={{
                 title: 'Profile',
                 headerShown: false,
@@ -67,7 +67,7 @@ const TabsLayout = () => {
                   focused={ focused }
                   />
                 )
-            }}/>
+            }}/> */}
         </Tabs>
     </>
   )

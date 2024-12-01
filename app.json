@@ -24,14 +24,16 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.anonymous.Fina",
-      "package": "com.jsm.Fina"
+      "package": "com.jsm.Fina",
+      "bundler": "metro"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.anonymous.Fina"
+      "package": "com.anonymous.Fina",
+      "bundler": "metro"
     },
     "web": {
       "favicon": "./assets/favicon.png",

@@ -5,28 +5,26 @@ import { View, Text, ScrollView, Dimensions, Alert, Image } from "react-native";
 
 // import { images } from "../../constants";
 import { createUser } from "../../lib/appwrite";
-import { CustomButton } from "../../components/CustomButton";
-import { FormField } from "../../components/FormField";
+import CustomButton from "../../components/CustomButton";
+import FormField from "../../components/FormField";
 import { useGlobalContext } from "../../context/GlobalProvider";
 
 const SignUp = () => {
   const { setUser, setIsLogged } = useGlobalContext();
-
   const [isSubmitting, setSubmitting] = useState(false);
   const [form, setForm] = useState({
-    username: "",
     email: "",
     password: "",
   });
 
   const submit = async () => {
-    if (form.username === "" || form.email === "" || form.password === "") {
+    if (form.email === "" || form.password === "") {
       Alert.alert("Error", "Please fill in all fields");
     }
 
     setSubmitting(true);
     try {
-      const result = await createUser(form.email, form.password, form.username);
+      const result = await createUser(form.email, form.password);
       setUser(result);
       setIsLogged(true);
       router.replace("/calender");
@@ -38,26 +36,21 @@ const SignUp = () => {
   };
 
   return (
-    <SafeAreaView className="bg-primary h-full">
+    <SafeAreaView className="h-full">
       <ScrollView>
         <View
-          className="w-full flex justify-center h-full px-4 my-6"
-          style={{
-            minHeight: Dimensions.get("window").height - 100,
-          }}
-        >
+          className="w-full justify-center min-h-[85vh] px-4 my-6">
 
-          <Text className="text-2xl font-semibold text-white mt-10 font-psemibold">
-            Sign Up to Fina
-          </Text>
+            <Text className="text-2xl text-semibold mt-10 font-psemibold">
+                Sign up for Fina
+            </Text>
 
-          <FormField
+          {/* <FormField
             title="Username"
             value={form.username}
             handleChangeText={(e) => setForm({ ...form, username: e })}
-            otherStyles="mt-10"
-          />
-
+            otherStyles="mt-7"
+          /> */}
           <FormField
             title="Email"
             value={form.email}
@@ -86,8 +79,7 @@ const SignUp = () => {
             </Text>
             <Link
               href="/sign-in"
-              className="text-lg font-psemibold text-secondary"
-            >
+              className="text-lg font-psemibold text-secondary">
               Login
             </Link>
           </View>

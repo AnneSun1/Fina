@@ -3,13 +3,17 @@ import {
   Text,
   View,
   TextInput,
-  TouchableOpacity,
+  Button,
+  TouchableOpacity
 } from "react-native";
 import React, { useRef, useEffect, useState } from "react";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { useIsFocused } from "@react-navigation/native";
+import { useUser } from "../../context/UserContext";
 
 const add = () => {
+  const { user, updateSpending } = useUser();
+  const updateUserSpending = useUser();
   const scrollViewRef = useRef(null);
   const isFocused = useIsFocused();
   const [showInput, setShowInput] = useState(false);
@@ -25,6 +29,12 @@ const add = () => {
   };
 
   const handleSubmit = () => {
+    const spending = {
+      "date": getFormattedDate(),
+      "category": selectedCategory,
+      "spending": inputValue
+    }
+    updateSpending(user.id, spending)
     setShowText(true);
     console.log(inputValue);
     setTimeout(() => {
@@ -40,6 +50,16 @@ const add = () => {
       console.log("Screen reset on focus");
     }
   }, [isFocused]);
+
+const getFormattedDate = () => {
+  const today = new Date();
+
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, '0'); // Month is 0-indexed, so add 1
+  const day = String(today.getDate()).padStart(2, '0');
+
+  return `${year}-${month}-${day}`;
+};
 
   return (
     <View className="flex-1 mt-40 items-center">
@@ -121,7 +141,6 @@ const add = () => {
           </TouchableOpacity>
         </View>
         <View className="px-28">
-          <TouchableOpacity className="items-center">
             <Icon
               name="credit-card"
               size={200}
@@ -130,25 +149,43 @@ const add = () => {
               onPress={() => handlePress("Bill Payment")}
             />
             <Text className="text-3xl text-customBlue">Bill Payment</Text>
-          </TouchableOpacity>
         </View>
       </ScrollView>
 
-      {showInput && (
-        <View>
-          <View className="flex-row align-center bg-slate-300 ">
-            <Text className="py-3 pl-3 font-bold text-xl">$</Text>
-            <TextInput
-              placeholder="Input Amount"
-              value={inputValue}
-              onChangeText={(text) => setInputValue(text)}
-            />
-          </View>
-          <TouchableOpacity onPress={handleSubmit} className="items-center p-7">
-            <Text className="bg-customPurple p-2">Submit</Text>
+          <View style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 4,
+            paddingVertical: 7,
+            width: "100%"
+          }}>
+            <TextInput style={{
+              width: "70%",
+              height: 40,
+              borderWidth: 2,
+              padding: 10,
+              borderRadius: 10,
+              borderColor: "#3E5295",
+            }} inputMode="decimal" placeholder="Add spendings" placeholderTextColor='#cbcacf' value={inputValue} onChangeText={(text) => setInputValue(text)}/>
+
+          
+          <TouchableOpacity style={{
+            width: '30%',
+            height: 40,
+            padding: 10,
+            borderRadius: 10,
+            borderWidth: 2,
+            borderColor: "#3E5295",
+            margin: 20,
+            justifyContent: 'center',  // Centering the text
+            alignItems: 'center',
+          }}
+          title="Submit" onPress={handleSubmit}>
+            <Text style={{ color: "#3E5295", fontWeight: 500 }}>
+              Submit
+            </Text>
           </TouchableOpacity>
         </View>
-      )}
       {showText && <Text>{selectedCategory} Expense Submitted</Text>}
     </View>
   );
